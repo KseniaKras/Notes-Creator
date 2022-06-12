@@ -5,7 +5,6 @@ import {AddNoteForm} from "./components/addNoteForm/AddNoteForm";
 
 
 function App() {
-
     return (
         <div className="App">
             <AddNoteForm/>

@@ -3,6 +3,7 @@ import s from './AddNoteForm.module.scss'
 import {AddTagHelper} from "../../utils/AddTagHelper";
 import {useDispatch} from "react-redux";
 import {addNewNote} from "../../redux/reducers/NotesReducer";
+import {Button} from "../button/Button";
 
 
 export const AddNoteForm = () => {
@@ -19,9 +20,9 @@ export const AddNoteForm = () => {
     const addNoteHandler = () => {
         if (note.trim() !== '') {
             dispatch(addNewNote(note, tags))
-            setNote('')
-            setTags([])
         }
+        setNote('')
+        setTags([])
     }
     const onKeyPressAddNote = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
@@ -38,12 +39,12 @@ export const AddNoteForm = () => {
                 className={s.textarea}
                 placeholder={'Enter new note'}
             />
-            <button
-                onClick={addNoteHandler}
-                className={s.button}
-            >
-                Add Note
-            </button>
+            <Button
+                name={'Add Note'}
+                onClickHandler={addNoteHandler}
+                isDisabled={note.trim() === ''}
+                style={s.button}
+            />
         </div>
     );
 };

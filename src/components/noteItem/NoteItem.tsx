@@ -3,14 +3,14 @@ import {Tags} from "../tags/Tags";
 import s from './NoteItem.module.scss'
 import {EditableSpan} from "./editableSpan/EditableSpan";
 import {useDispatch} from "react-redux";
-import {deleteNote, TagsType, updateNote} from "../../redux/reducers/NotesReducer";
+import {deleteNote, updateNote} from "../../redux/reducers/NotesReducer";
+import {Button} from "../button/Button";
+
 
 type NoteItemType = {
-    text: string
-    tags: TagsType[]
     id: string
 }
-export const NoteItem: FC<NoteItemType> = ({text, tags, id}) => {
+export const NoteItem: FC<NoteItemType> = ({id}) => {
     const dispatch = useDispatch()
 
     const updateNoteText = (text: string) => {
@@ -22,24 +22,15 @@ export const NoteItem: FC<NoteItemType> = ({text, tags, id}) => {
 
     return (
         <div className={s.noteBlock}>
-            <div className={s.buttonsBlock}>
-                <button onClick={deleteNoteItem}>
-                    Delete
-                </button>
-            </div>
-
+            <Button
+                name={'Delete'}
+                onClickHandler={deleteNoteItem}
+            />
             <EditableSpan
-                text={text}
                 updateNote={updateNoteText}
-                tags={tags}
                 noteId={id}
             />
-            <Tags
-                tags={tags}
-                noteId={id}
-            />
+            <Tags noteId={id}/>
         </div>
-
     );
 };
-

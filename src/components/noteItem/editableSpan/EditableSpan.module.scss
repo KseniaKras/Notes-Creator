@@ -1,20 +1,38 @@
+@import "src/common/styles/variables";
+
 .editableSpanBlock {
-  height: 90%;
 
   .textarea {
     width: 100%;
-    min-height: 150px;
+    height: 200px;
     background: inherit;
     padding: 10px;
     font-size: 16px;
+    color: $white;
+    line-height: 25px;
   }
-  .hoverValue {
-    background-color: green;
-  }
-  .text {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
 
+  .hoverValue {
+    background-color: $lightGreen;
+  }
+
+  .text {
+    height: 200px;
+    overflow-y: scroll;
+
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 15px 10px;
+
+      .hoverWord {
+        background-color: $darkGreen;
+        margin: 3px;
+      }
+
+      .word {
+        margin: 3px;
+      }
+    }
   }
 }

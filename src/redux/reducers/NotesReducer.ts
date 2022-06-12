@@ -1,24 +1,15 @@
 import {v1} from "uuid";
 import Data from '../../data/db.json';
 
-enum NOTES {
+
+export enum NOTES {
     ADD_NEW_NOTE = 'ADD_NEW_NOTE',
     UPDATE_NOTE = 'UPDATE_NOTE',
     DELETE_NOTE = 'DELETE_NOTE',
     ADD_TAG = 'ADD_TAG',
     DELETE_TAG = 'DELETE_TAG',
-    // SET_NOTES_BY_TAG = 'SET_NOTES_BY_TAG',
 }
 
-export type TagsType = {
-    id: string
-    title: string
-}
-export type NoteType = {
-    id: string
-    text: string
-    tags: TagsType[]
-}
 
 const initialState: NoteType[] = Data.notes
 
@@ -48,31 +39,17 @@ export const notesReducer = (state = initialState, action: NotesReducerType) => 
                     ]
                 }
                 : note)
-            // return state.map(note => note.id === action.payload.noteId
-            //     ? {
-            //         ...note,
-            //         tags: action.payload.tags
-            //     }
-            //     : note)
         case NOTES.DELETE_TAG:
             return state.map(note => note.id === action.payload.noteId
                 ? {...note, tags: note.tags.filter(tag => tag.id !== action.payload.tagId)}
                 : note)
-        // case NOTES.SET_NOTES_BY_TAG:
-        //     let stateCopy = [...state]
-        //     debugger
-        //     if (action.payload.tagTitle === '') {
-        //         return [...state]
-        //     } else {
-        //         return stateCopy.filter(note => note.tags
-        //             .some(t => t.title.slice(1).toLowerCase() === action.payload.tagTitle.toLowerCase()))
-        //     }
         default:
             return state
     }
 }
 
 
+//ActionCreators
 export const addNewNote = (text: string, tags: string[]) => ({
     type: NOTES.ADD_NEW_NOTE,
     payload: {
@@ -100,13 +77,6 @@ export const addNewTag = (noteId: string, tagTitle: string) => ({
         tagTitle,
     }
 } as const)
-// export const addNewTag = (noteId: string, tags: string[]) => ({
-//     type: NOTES.ADD_TAG,
-//     payload: {
-//         noteId,
-//         tags,
-//     }
-// } as const)
 export const deleteTag = (noteId: string, tagId: string) => ({
     type: NOTES.DELETE_TAG,
     payload: {
@@ -114,18 +84,22 @@ export const deleteTag = (noteId: string, tagId: string) => ({
         tagId,
     }
 } as const)
-// export const setNotesByTag = (tagTitle: string) => ({
-//     type: NOTES.SET_NOTES_BY_TAG,
-//     payload: {
-//         tagTitle,
-//     }
-// } as const)
 
 
+//types
 type NotesReducerType =
     | ReturnType<typeof addNewNote>
     | ReturnType<typeof updateNote>
     | ReturnType<typeof deleteNote>
     | ReturnType<typeof addNewTag>
     | ReturnType<typeof deleteTag>
-// | ReturnType<typeof setNotesByTag>
+
+export type TagsType = {
+    id: string
+    title: string
+}
+export type NoteType = {
+    id: string
+    text: string
+    tags: TagsType[]
+}

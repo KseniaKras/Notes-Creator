@@ -1,18 +1,22 @@
 import React, {ChangeEvent, KeyboardEvent, FC, useState} from 'react';
 import s from './EditableSpan.module.scss'
-import {addNewTag, TagsType} from "../../../redux/reducers/NotesReducer";
+import {addNewTag} from "../../../redux/reducers/NotesReducer";
 import {AddTagHelper} from "../../../utils/AddTagHelper";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {selectNoteTags, selectNoteText} from "../../../redux/selectors/NotesSelector";
+import {Button} from "../../button/Button";
 
 
 type EditableSpanType = {
-    text: string
     updateNote: (text: string) => void
-    tags: TagsType[]
     noteId: string
 }
-export const EditableSpan: FC<EditableSpanType> = ({text, updateNote, tags, noteId}) => {
+export const EditableSpan: FC<EditableSpanType> = ({updateNote, noteId}) => {
     const dispatch = useDispatch()
+
+    const text = useSelector(state => selectNoteText(state, noteId))
+    const tags = useSelector(state => selectNoteTags(state, noteId))
+
     const [editMode, setEditMode] = useState<boolean>(false)
     let [title, setTitle] = useState(text)
 
@@ -23,83 +27,63 @@ export const EditableSpan: FC<EditableSpanType> = ({text, updateNote, tags, note
     const updateNoteTitle = () => {
         updateNote(title)
         setEditMode(false)
-        let value = AddTagHelper(title.split(' '))
-        console.log('valueTag: ', value)
-        let s = value.reduce((acc,el) => {
+        let valueTags = AddTagHelper(title.split(' '))
+        console.log('valueTag: ', valueTags)
+        valueTags.reduce((acc, el) => {
             let filteredTags = tags.filter(t => t.title === el)
             if (filteredTags.length === 0) {
                 dispatch(addNewTag(noteId, el))
             }
             console.log('filteredTags: ', filteredTags)
             return acc
-        },[])
-        console.log('s:  ', s)
-        // for (let i = 0; i < tags.length; i++){
-        //     debugger
-        //     tags[i].title !== value.find(v => v === tags[i].title) ?
-        //     array = value.filter(v => v !== tags[i].title.slice(1))
-        // }
+        }, [])
     }
 
     const onKeyPressUpdateNote = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
             updateNoteTitle()
-        } else if (e.key === ' ') {
-            // let value = AddTagHelper(title.split(' '))
-            // console.log(value.pop.toString())
-            // dispatch(addNewTag(noteId, value.pop.toString()))
         }
     }
 
-    const finalClassName = s.textarea
-
-    if (tags) {
-        let array = title.split(' ')
-        for (let i = 0; i < array.length; i++) {
-            if (array[i].charAt(0) === '#') {
+    const contentElements = title && title.split(' ').map((word, i) => {
+        return <span key={i}>
+            {
+                tags && tags.some(t => t.title.slice(1).toLowerCase() === word.toLowerCase()
+                    || tags.some(t => t.title.toLowerCase() === word.toLowerCase()))
+                    ? <span className={s.hoverWord}>{word}</span>
+                    : <span className={s.word}>{word}</span>
             }
-        }
-    }
+           </span>
+    })
 
     return (
         <div className={s.editableSpanBlock}>
             {
                 editMode
                     ? <>
-                    <textarea
-                        autoFocus
-                        value={title}
-                        onChange={onChangeUpdateNote}
-                        onBlur={updateNoteTitle}
-                        onKeyPress={onKeyPressUpdateNote}
-                        className={finalClassName}
-                    />
-                        <button
-                            style={{display: 'block', width: '100%'}}
-                            onClick={updateNoteTitle}>
-                            Update
-                        </button>
+                        <textarea
+                            autoFocus
+                            value={title}
+                            onChange={onChangeUpdateNote}
+                            onBlur={() => setEditMode(false)}
+                            onKeyPress={onKeyPressUpdateNote}
+                            className={s.textarea}
+                        />
+                        <Button
+                            name={'Update'}
+                            onClickHandler={updateNoteTitle}
+                        />
                     </>
                     : <>
-                    <span
-                        className={s.text}>
-                        {title.split(' ').map((word, i) => {
-                            return <span key={i}>
-                                {
-                                    word.charAt(0) === '#' ||
-                                    tags.some(t => t.title.slice(1).toLowerCase() === word.toLowerCase())
-                                        ? <span style={{backgroundColor: 'blue', margin: '3px'}}>{word}</span>
-                                        : <span style={{margin: '3px'}}>{word}</span>
-                                }
-                            </span>
-
-                        })}
-                </span>
-                        <button
-                            style={{display: 'block', width: '100%'}}
-                            onClick={() => setEditMode(true)}>
-                            Edit
-                        </button>
+                        <div className={s.text}>
+                            <span className={s.content}>
+                                {contentElements}
+                             </span>
+                        </div>
+                        <Button
+                            name={'Edit'}
+                            onClickHandler={() => setEditMode(true)}
+                        />
                     </>
             }
         </div>

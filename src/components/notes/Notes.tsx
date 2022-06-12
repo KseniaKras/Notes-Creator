@@ -1,14 +1,13 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NoteItem} from "../noteItem/NoteItem";
 import s from './Notes.module.scss'
 import {useSelector} from "react-redux";
-import {selectNotes} from "../../selectors/NotesSelector";
+import {selectNotes} from "../../redux/selectors/NotesSelector";
 import {SearchForm} from "../searchForm/SearchForm";
 import {NoteType} from "../../redux/reducers/NotesReducer";
 
 
-type NotesType = {}
-export const Notes: FC<NotesType> = () => {
+export const Notes = () => {
     const notes = useSelector(selectNotes)
     const [notesForRender, setNotesForRender] = useState<NoteType[]>(notes)
 
@@ -20,9 +19,8 @@ export const Notes: FC<NotesType> = () => {
         if (tag === '') {
             setNotesForRender(notes)
         } else {
-            let newNotes = notes
-                .filter(note => note.tags
-                    .some(t => t.title.slice(1).toLowerCase() === tag.toLowerCase()))
+            let newNotes = notes.filter(note => note.tags
+                .some(t => t.title.slice(1).toLowerCase() === tag.toLowerCase()))
             setNotesForRender(newNotes)
         }
     }
@@ -36,8 +34,6 @@ export const Notes: FC<NotesType> = () => {
                         return <NoteItem
                             key={note.id}
                             id={note.id}
-                            text={note.text}
-                            tags={note.tags}
                         />
                     })}
             </div>

@@ -1,4 +1,5 @@
 import React, {ChangeEvent, FC, KeyboardEvent, useState} from 'react';
+import s from './SearchForm.module.scss';
 
 type SearchFormType = {
     onSearch: (tag: string) => void
@@ -16,15 +17,14 @@ export const SearchForm: FC<SearchFormType> = ({onSearch}) => {
     }
 
     return (
-        <div style={{textAlign: 'center'}}>
+        <div className={s.searchBlock}>
             <span>Search by tag: </span>
             <input
                 type={'text'}
                 value={title}
                 onChange={onChangeSetTitle}
                 onKeyPress={searchNotes}
-                placeholder={'Enter your tag'}
-                style={{border: '1px solid black', width: '150px', height: '30px', padding: '0 10px'}}
+                placeholder={'Enter your tag and press "Enter"'}
             />
         </div>
     );

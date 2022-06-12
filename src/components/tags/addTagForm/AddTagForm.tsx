@@ -11,22 +11,21 @@ export const AddTagForm: FC<AddTagFormType> = ({addTag}) => {
         setTitle(e.currentTarget.value)
     }
 
+    const checkFirstChar = (value: string) => {
+        if (value.charAt(0) === '#') {
+            addTag(value)
+        } else {
+            addTag(`#${value}`)
+        }
+        setTitle('')
+    }
+
     const addNewTag = (e: KeyboardEvent<HTMLInputElement>) => {
         let newTitle = title.trim()
         if (newTitle !== '' && e.key === ' ') {
-            if (title.charAt(0) === '#') {
-                addTag(newTitle)
-            } else {
-                addTag(`#${newTitle}`)
-            }
-            setTitle('')
+            checkFirstChar(newTitle)
         } else if (newTitle !== '' && e.key === 'Enter') {
-            if (title.charAt(0) === '#') {
-                addTag(newTitle)
-            } else {
-                addTag(`#${newTitle}`)
-            }
-            setTitle('')
+            checkFirstChar(newTitle)
         }
     }
 
