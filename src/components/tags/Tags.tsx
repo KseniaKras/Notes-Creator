@@ -17,7 +17,7 @@ export const Tags: FC<TagsPropsType> = ({tags, noteId}) => {
     }
 
     const addTag = (text: string) => {
-        // dispatch(addNewTag(noteId, text))
+        dispatch(addNewTag(noteId, text))
     }
 
     return (
