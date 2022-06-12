@@ -1,3 +1,7 @@
+Open in netlify: https://62a630ade0748413717d1339--clever-kataifi-bc3c8b.netlify.app/
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
