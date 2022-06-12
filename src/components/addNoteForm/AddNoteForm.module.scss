@@ -1,0 +1,36 @@
+.addItemForm {
+  width: 90%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+
+  .textarea {
+    font-family: inherit;
+    outline: none;
+    width: 100%;
+    max-height: 90%;
+    padding: 10px 20px;
+    border: 3px solid rgba(97, 182, 251, 0.92);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(97, 182, 251, 0.72);
+    color: black;
+  }
+
+  .button {
+    width: 100px;
+    height: 30px;
+    background-color: #6192fb;
+    border: 1px solid #4675dc;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #27A3C7FF;
+    }
+  }
+}

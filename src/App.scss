@@ -1,0 +1,25 @@
+.App {
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 4px; /* ширина для вертикального скролла */
+  height: 80%; /* высота для горизонтального скролла */
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  height: 50px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background: #6d6d6d;
+  position: relative;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  -webkit-border-radius: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+}

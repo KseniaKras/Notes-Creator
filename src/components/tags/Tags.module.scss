@@ -1,0 +1,32 @@
+.tagsBlock {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  border: 1px solid black;
+  height: auto;
+  margin-top: 10px;
+  color: black;
+
+  .tagItem {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 5px;
+
+    .title {
+      margin-right: 5px;
+
+    }
+
+    .button {
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+
+      .icon {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+.editableSpanBlock {
+  height: 90%;
+
+  .textarea {
+    width: 100%;
+    min-height: 150px;
+    background: inherit;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .hoverValue {
+    background-color: green;
+  }
+  .text {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+
+  }
+}

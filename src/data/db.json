@@ -1,0 +1,62 @@
+{
+  "notes": [
+    {
+      "id": "1",
+      "text": "Lorem #Ipsum is simply dummy text of the printing and typesetting #industry.",
+      "tags": [
+        {
+          "id": "151",
+          "title": "#Ipsum"
+        },
+        {
+          "id": "868",
+          "title": "#book"
+        },
+        {
+          "id": "4512",
+          "title": "#react"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem #Ipsum has been the industry's #standard dummy text ever since the 1500s, ",
+      "tags": [
+        {
+          "id": "878",
+          "title": "#Ipsum"
+        },
+        {
+          "id": "123",
+          "title": "#standard"
+        },
+        {
+          "id": "855",
+          "title": "#Redux"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "text": "Screenshot Prevention in Mobile App Hello Guys, here is how to block taking screenshots in React Native. This post is on the request of many readers who were asking me how to disable/prevent screenshot capture, ...",
+      "tags": [
+        {
+          "id": "ifhbvdf7",
+          "title": "#Screenshot"
+        },
+        {
+          "id": "zdf.vbzdl7",
+          "title": "#Mobile"
+        },
+        {
+          "id": "zfd.vbzdk63t",
+          "title": "#Native"
+        },
+        {
+          "id": "rdkfjvbzkd78",
+          "title": "#react"
+        }
+      ]
+    }
+  ]
+}
