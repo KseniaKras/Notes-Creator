@@ -2,7 +2,7 @@
   "notes": [
     {
       "id": "1",
-      "text": "Lorem #Ipsum is simply dummy text of the printing and typesetting #industry.",
+      "text": "Lorem #Ipsum is simply dummy #text of the printing and typesetting #industry",
       "tags": [
         {
           "id": "151",
@@ -10,11 +10,11 @@
         },
         {
           "id": "868",
-          "title": "#book"
+          "title": "#industry"
         },
         {
           "id": "4512",
-          "title": "#react"
+          "title": "#text"
         }
       ]
     },
@@ -32,7 +32,7 @@
         },
         {
           "id": "855",
-          "title": "#Redux"
+          "title": "#Lorem"
         }
       ]
     },
